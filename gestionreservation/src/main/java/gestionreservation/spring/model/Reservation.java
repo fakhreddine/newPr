@@ -1,12 +1,17 @@
 package gestionreservation.spring.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,15 +21,37 @@ public class Reservation {
 	@Id
 	@Column(name="idReservation")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idReservation;
-	//private Client client;
-	//private Chambre chambre;
+	private long idReservation;
+	
 	private Date dateDebutSejour;
 	private Date dateFinSejour;
 	private Date dateReservation;
 	private boolean arriver;
 	private boolean sortie;
 	
+	@OneToMany(mappedBy="reservations")
+	private List<ChambreReservation> chambres;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="clienId")
+	private Client client;
+	
+	public List<ChambreReservation> getChambres() {
+		return chambres;
+	}
+	public void setChambres(List<ChambreReservation> chambres) {
+		this.chambres = chambres;
+	}
+	public void setIdReservation(long idReservation) {
+		this.idReservation = idReservation;
+	}
+	
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
 	public Reservation() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -39,7 +66,7 @@ public class Reservation {
 		this.arriver = arriver;
 		this.sortie = sortie;
 	}
-	public int getIdReservation() {
+	public long getIdReservation() {
 		return idReservation;
 	}
 	public void setIdReservation(int idReservation) {
