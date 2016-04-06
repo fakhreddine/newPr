@@ -29,10 +29,16 @@ public class ClientController {
 		model.addAttribute("listClients", this.clientService.listClients());
 		return "client";
 	}
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String admin(Model model) {
+	@RequestMapping(value = "/admin1", method = RequestMethod.GET)
+	public String admin1(Model model) {
 		return "admin/index";
 	}
+	
+	@RequestMapping(value = "/admin2", method = RequestMethod.GET)
+	public String admin2(Model model) {
+		return "startbootstrap-sb-admin-1.0.1/index";
+	}
+	
 	@RequestMapping(value = "/inscrire", method = RequestMethod.GET)
 	public String inscrire(Model model) {
 		model.addAttribute("client", new Client());
