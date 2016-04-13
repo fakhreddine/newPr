@@ -1,59 +1,71 @@
 package gestionreservation.spring.model;
 
-import java.util.Collection;
+import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+/**
+ * The persistent class for the categorie database table.
+ * 
+ */
 @Entity
-@Table(name="Categorie")
-public class Categorie {
+@Table(name="categorie")
+@NamedQuery(name="Categorie.findAll", query="SELECT c FROM Categorie c")
+public class Categorie implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="idCategorie")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private int idCategorie;
-	private String description;
-	
 
-	
-	@OneToMany(mappedBy="categorie",targetEntity=Chambre.class,
-	fetch=FetchType.EAGER)
-	private Collection<Chambre> chambres;  
-	
-	
-	public Collection<Chambre> getChambres() {
-		return chambres;
+	@Column(length=254)
+	private String description;
+
+	//bi-directional many-to-one association to Chambre
+	@OneToMany(mappedBy="categorie")
+	private List<Chambre> chambres;
+
+	public Categorie() {
 	}
-	public void setChambres(Collection<Chambre> chambres) {
-		this.chambres = chambres;
-	}
+
 	public int getIdCategorie() {
-		return idCategorie;
+		return this.idCategorie;
 	}
+
 	public void setIdCategorie(int idCategorie) {
 		this.idCategorie = idCategorie;
 	}
+
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	@Override
-	public String toString() {
-		return "Categorie [idCategorie=" + idCategorie + ", Description=" + description + "]";
-	}
-	
-	
-}
 
+	public List<Chambre> getChambres() {
+		return this.chambres;
+	}
+
+	public void setChambres(List<Chambre> chambres) {
+		this.chambres = chambres;
+	}
+
+	public Chambre addChambre(Chambre chambre) {
+		getChambres().add(chambre);
+		chambre.setCategorie(this);
+
+		return chambre;
+	}
+
+	public Chambre removeChambre(Chambre chambre) {
+		getChambres().remove(chambre);
+		chambre.setCategorie(null);
+
+		return chambre;
+	}
+
+}

@@ -1,109 +1,79 @@
 package gestionreservation.spring.model;
 
+import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+/**
+ * The persistent class for the chambre database table.
+ * 
+ */
 @Entity
-@Table(name="Chambre")
-public class Chambre {
+@Table(name="chambre")
+@NamedQuery(name="Chambre.findAll", query="SELECT c FROM Chambre c")
+public class Chambre implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="idChambre")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private long idChambre;
-	
+
 	private int numChambre;
-	private int tel_chambre;
-	
-	@Column(name = "idCategorie")
-    private int idCategorie;
-	@ManyToOne(optional=false)
-    @JoinColumn(name="idCategorie",referencedColumnName="idCategorie",updatable=false,insertable=false)
+
+	private int telChambre;
+
+	//bi-directional many-to-many association to Reservation
+	@ManyToMany(mappedBy="chambres")
+	private List<Reservation> reservations;
+
+	//bi-directional many-to-one association to Categorie
+	@ManyToOne
+	@JoinColumn(name="idCategorie", nullable=false)
 	private Categorie categorie;
-	
-	
-	 @OneToMany(mappedBy="chambre")
-	  private List<ChambreReservation> reservations;
-	  // Add an employee to the project.
-	  // Create an association object for the relationship and set its data.
-	  public void addReservation(Reservation reservation) {
-		ChambreReservation chambreReservation = new ChambreReservation();
-		chambreReservation.setReservation(reservation);
-		chambreReservation.setChambre(this);
-		chambreReservation.setIdReservation(reservation.getIdReservation());
-		chambreReservation.setIdChambre(this.getIdChambre());
-	    this.reservations.add(chambreReservation);
-	    // Also add the association object to the employee.
-	    reservation.getChambres().add(chambreReservation);
-	  }
-	
-	
-	
-	
-	//@OneToMany(mappedBy="chambre")
-	//private List<Reservation> clients;
-//	public void addClient(Client client, boolean teamLead) {
-//	    Reservation reservation = new Reservation();
-//	    reservation.setClient(client);
-//	    reservation.setChambre(this);
-//	    reservation.setClientId(client.getIdClient());
-//	    reservation.setChambreId(this.getIdChambre());
-//	    reservation.setIsTeamLead(teamLead);
-//
-//	    this.clients.add(reservation);
-//	    // Also add the association object to the employee.
-//	    client.getChambres().add(reservation);
-//	  }
-	
-	
-	
-	
-	
-	
-	
-	
-	@Override
-	public String toString() {
-		return "Chambre [idChambre=" + idChambre + ", numChambre=" + numChambre + ", tel_chambre=" + tel_chambre
-				+ ", categorie=" + categorie + "]";
+
+	public Chambre() {
 	}
-	public Categorie getCategorie() {
-		return categorie;
-	}
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
-	}
+
 	public long getIdChambre() {
-		return idChambre;
+		return this.idChambre;
 	}
-	public void setIdChambre(int idChambre) {
+
+	public void setIdChambre(long idChambre) {
 		this.idChambre = idChambre;
 	}
+
 	public int getNumChambre() {
-		return numChambre;
+		return this.numChambre;
 	}
+
 	public void setNumChambre(int numChambre) {
 		this.numChambre = numChambre;
 	}
-	public int getTel_chambre() {
-		return tel_chambre;
+
+	public int getTelChambre() {
+		return this.telChambre;
 	}
-	public void setTel_chambre(int tel_chambre) {
-		this.tel_chambre = tel_chambre;
+
+	public void setTelChambre(int telChambre) {
+		this.telChambre = telChambre;
 	}
-	
-	
+
+	public List<Reservation> getReservations() {
+		return this.reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public Categorie getCategorie() {
+		return this.categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
 
 }
-

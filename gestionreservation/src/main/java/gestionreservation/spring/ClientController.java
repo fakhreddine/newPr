@@ -33,7 +33,12 @@ public class ClientController {
 	public String admin1(Model model) {
 		return "admin/index";
 	}
-	
+	@RequestMapping(value = "/hotel", method = RequestMethod.GET)
+	public String home(Model model) {
+		//model.addAttribute("reservation", new Reservation());
+	//	model.addAttribute("listReservations", this.reservationService.listReservations());
+		return "five-star-hotel/index";
+	}
 	@RequestMapping(value = "/admin2", method = RequestMethod.GET)
 	public String admin2(Model model) {
 		return "startbootstrap-sb-admin-1.0.1/index";

@@ -2,36 +2,31 @@ package gestionreservation.spring.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
 
 /**
- * The persistent class for the client database table.
+ * The persistent class for the agent database table.
  * 
  */
 @Entity
-@Table(name="client")
-@NamedQuery(name="Client.findAll", query="SELECT c FROM Client c")
-public class Client implements Serializable {
+@Table(name="agent")
+@NamedQuery(name="Agent.findAll", query="SELECT a FROM Agent a")
+public class Agent implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	@Id
-	private long idClient;
+	private long idAgent;
 	
-	public long getIdClient() {
-		return idClient;
-	}
-
-	public void setIdClient(long idClient) {
-		this.idClient = idClient;
-	}
-
 	@Column(length=254)
 	private String adresse;
 
 	private int codePostal;
 
-	private int email;
+	@Column(length=254)
+	private String grade;
 
 	private BigInteger idUtilisateur;
 
@@ -49,14 +44,17 @@ public class Client implements Serializable {
 	@Column(length=254)
 	private String prenom;
 
+	@Column(precision=10)
+	private BigDecimal salaire;
+
 	@Column(length=254)
 	private String ville;
 
 	//bi-directional many-to-one association to Reservation
-	@OneToMany(mappedBy="client")
+	@OneToMany(mappedBy="agent")
 	private List<Reservation> reservations;
 
-	public Client() {
+	public Agent() {
 	}
 
 	public String getAdresse() {
@@ -75,12 +73,12 @@ public class Client implements Serializable {
 		this.codePostal = codePostal;
 	}
 
-	public int getEmail() {
-		return this.email;
+	public String getGrade() {
+		return this.grade;
 	}
 
-	public void setEmail(int email) {
-		this.email = email;
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 
 	public BigInteger getIdUtilisateur() {
@@ -131,6 +129,14 @@ public class Client implements Serializable {
 		this.prenom = prenom;
 	}
 
+	public BigDecimal getSalaire() {
+		return this.salaire;
+	}
+
+	public void setSalaire(BigDecimal salaire) {
+		this.salaire = salaire;
+	}
+
 	public String getVille() {
 		return this.ville;
 	}
@@ -149,14 +155,14 @@ public class Client implements Serializable {
 
 	public Reservation addReservation(Reservation reservation) {
 		getReservations().add(reservation);
-		reservation.setClient(this);
+		reservation.setAgent(this);
 
 		return reservation;
 	}
 
 	public Reservation removeReservation(Reservation reservation) {
 		getReservations().remove(reservation);
-		reservation.setClient(null);
+		reservation.setAgent(null);
 
 		return reservation;
 	}
