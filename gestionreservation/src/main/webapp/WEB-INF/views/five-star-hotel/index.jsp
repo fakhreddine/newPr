@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -31,12 +33,12 @@
         <div class="header-box">
           <div class="inner">
             <ul class="nav">
-              <li><a href="index.html" class="current">Home page</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li><a href="restaurant.html">Restaurant</a></li>
-              <li><a href="testimonials.html">Testimonials</a></li>
-              <li><a href="booking.html">Booking</a></li>
+              <li><a href="index.jsp" class="current">Home page</a></li>
+              <li><a href="services.jsp">Services</a></li>
+              <li><a href="gallery.jsp">Gallery</a></li>
+              <li><a href="restaurant.jsp">Restaurant</a></li>
+              <li><a href="testimonials.jsp">Testimonials</a></li>
+              <li><a href="booking.jsp">Booking</a></li>
             </ul>
           </div>
         </div>
