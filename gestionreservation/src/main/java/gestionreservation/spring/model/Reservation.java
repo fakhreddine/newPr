@@ -2,6 +2,10 @@ package gestionreservation.spring.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -11,17 +15,16 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="reservation")
 @NamedQuery(name="Reservation.findAll", query="SELECT r FROM Reservation r")
 public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
-	private long idReservation;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String idReservation;
 
-	private byte arriver;
+	private boolean arrivee;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateDebutSejour;
@@ -32,53 +35,56 @@ public class Reservation implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateReservation;
 
-	private byte sortie;
+	private BigDecimal montantPayer;
+
+	private BigDecimal montantTotal;
+
+	private int nbPersonne;
+
+	private boolean reserver;
+
+	private boolean sortie;
+
+	//bi-directional many-to-many association to Chambre
+	@ManyToMany(mappedBy="reservations")
+	private List<Chambre> chambres;
 
 	//bi-directional many-to-one association to Agent
 	@ManyToOne
-	@JoinColumn(name="idAgent", referencedColumnName="idAgent")
+	@JoinColumn(name="Age_idPersonne")
 	private Agent agent;
 
-	//bi-directional many-to-many association to Chambre
-	@ManyToMany
-	@JoinTable(
-		name="chambrereservation"
-		, joinColumns={
-			@JoinColumn(name="idReservation", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="idChambre", nullable=false)
-			}
-		)
-	private List<Chambre> chambres;
-
-	//bi-directional many-to-one association to Client
+	//bi-directional many-to-one association to Facture
 	@ManyToOne
-	@JoinColumn(name="idClient", referencedColumnName="idClient")
-	private Client client;
-
-	//bi-directional one-to-one association to Facture
-	@OneToOne
-	@JoinColumn(name="idFacture", nullable=false)
+	@JoinColumn(name="idFacture")
 	private Facture facture;
+
+	//bi-directional many-to-one association to Utilisateur
+	@ManyToOne
+	@JoinColumn(name="idPersonne")
+	private Utilisateur utilisateur;
+
+	//bi-directional many-to-one association to Serviceconsommation
+	@OneToMany(mappedBy="reservation")
+	private List<Serviceconsommation> serviceconsommations;
 
 	public Reservation() {
 	}
 
-	public long getIdReservation() {
+	public String getIdReservation() {
 		return this.idReservation;
 	}
 
-	public void setIdReservation(long idReservation) {
+	public void setIdReservation(String idReservation) {
 		this.idReservation = idReservation;
 	}
 
-	public byte getArriver() {
-		return this.arriver;
+	public boolean getArrivee() {
+		return this.arrivee;
 	}
 
-	public void setArriver(byte arriver) {
-		this.arriver = arriver;
+	public void setArrivee(boolean arrivee) {
+		this.arrivee = arrivee;
 	}
 
 	public Date getDateDebutSejour() {
@@ -105,20 +111,44 @@ public class Reservation implements Serializable {
 		this.dateReservation = dateReservation;
 	}
 
-	public byte getSortie() {
+	public BigDecimal getMontantPayer() {
+		return this.montantPayer;
+	}
+
+	public void setMontantPayer(BigDecimal montantPayer) {
+		this.montantPayer = montantPayer;
+	}
+
+	public BigDecimal getMontantTotal() {
+		return this.montantTotal;
+	}
+
+	public void setMontantTotal(BigDecimal montantTotal) {
+		this.montantTotal = montantTotal;
+	}
+
+	public int getNbPersonne() {
+		return this.nbPersonne;
+	}
+
+	public void setNbPersonne(int nbPersonne) {
+		this.nbPersonne = nbPersonne;
+	}
+
+	public Object getReserver() {
+		return this.reserver;
+	}
+
+	public void setReserver(boolean reserver) {
+		this.reserver = reserver;
+	}
+
+	public Object getSortie() {
 		return this.sortie;
 	}
 
-	public void setSortie(byte sortie) {
+	public void setSortie(boolean sortie) {
 		this.sortie = sortie;
-	}
-
-	public Agent getAgent() {
-		return this.agent;
-	}
-
-	public void setAgent(Agent agent) {
-		this.agent = agent;
 	}
 
 	public List<Chambre> getChambres() {
@@ -129,12 +159,12 @@ public class Reservation implements Serializable {
 		this.chambres = chambres;
 	}
 
-	public Client getClient() {
-		return this.client;
+	public Agent getAgent() {
+		return this.agent;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setAgent(Agent agent) {
+		this.agent = agent;
 	}
 
 	public Facture getFacture() {
@@ -143,6 +173,36 @@ public class Reservation implements Serializable {
 
 	public void setFacture(Facture facture) {
 		this.facture = facture;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return this.utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public List<Serviceconsommation> getServiceconsommations() {
+		return this.serviceconsommations;
+	}
+
+	public void setServiceconsommations(List<Serviceconsommation> serviceconsommations) {
+		this.serviceconsommations = serviceconsommations;
+	}
+
+	public Serviceconsommation addServiceconsommation(Serviceconsommation serviceconsommation) {
+		getServiceconsommations().add(serviceconsommation);
+		serviceconsommation.setReservation(this);
+
+		return serviceconsommation;
+	}
+
+	public Serviceconsommation removeServiceconsommation(Serviceconsommation serviceconsommation) {
+		getServiceconsommations().remove(serviceconsommation);
+		serviceconsommation.setReservation(null);
+
+		return serviceconsommation;
 	}
 
 }

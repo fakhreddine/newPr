@@ -6,41 +6,41 @@ import java.util.List;
 
 
 /**
- * The persistent class for the categorie database table.
+ * The persistent class for the typechambre database table.
  * 
  */
 @Entity
-@NamedQuery(name="Categorie.findAll", query="SELECT c FROM Categorie c")
-public class Categorie implements Serializable {
+@NamedQuery(name="Typechambre.findAll", query="SELECT t FROM Typechambre t")
+public class Typechambre implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idCategorie;
+	private int idType;
 
-	private String descriptionCatgorie;
+	private String descriptionType;
 
 	//bi-directional many-to-one association to Chambre
-	@OneToMany(mappedBy="categorie")
+	@OneToMany(mappedBy="typechambre")
 	private List<Chambre> chambres;
 
-	public Categorie() {
+	public Typechambre() {
 	}
 
-	public int getIdCategorie() {
-		return this.idCategorie;
+	public int getIdType() {
+		return this.idType;
 	}
 
-	public void setIdCategorie(int idCategorie) {
-		this.idCategorie = idCategorie;
+	public void setIdType(int idType) {
+		this.idType = idType;
 	}
 
-	public String getDescriptionCatgorie() {
-		return this.descriptionCatgorie;
+	public String getDescriptionType() {
+		return this.descriptionType;
 	}
 
-	public void setDescriptionCatgorie(String descriptionCatgorie) {
-		this.descriptionCatgorie = descriptionCatgorie;
+	public void setDescriptionType(String descriptionType) {
+		this.descriptionType = descriptionType;
 	}
 
 	public List<Chambre> getChambres() {
@@ -53,14 +53,14 @@ public class Categorie implements Serializable {
 
 	public Chambre addChambre(Chambre chambre) {
 		getChambres().add(chambre);
-		chambre.setCategorie(this);
+		chambre.setTypechambre(this);
 
 		return chambre;
 	}
 
 	public Chambre removeChambre(Chambre chambre) {
 		getChambres().remove(chambre);
-		chambre.setCategorie(null);
+		chambre.setTypechambre(null);
 
 		return chambre;
 	}

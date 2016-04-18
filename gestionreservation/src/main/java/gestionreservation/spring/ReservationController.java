@@ -38,7 +38,7 @@ public class ReservationController {
 	@RequestMapping(value= "/reservation/add", method = RequestMethod.POST)
 	public String addReservation(@ModelAttribute("reservation") Reservation p){
 		
-		if(p.getIdReservation() == 0){
+		if(p.getIdReservation() == "0"){
 			//new reservation, add it
 			this.reservationService.addReservation(p);
 		}else{

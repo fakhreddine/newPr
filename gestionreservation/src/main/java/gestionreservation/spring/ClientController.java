@@ -1,5 +1,7 @@
 package gestionreservation.spring;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,23 @@ public class ClientController {
 	@Qualifier(value="clientService")
 	public void setClientService(ClientService ps){
 		this.clientService = ps;
+	}
+	@RequestMapping(value = "/inscription", method = RequestMethod.GET)
+	public String inscription(Model model) {
+		model.addAttribute("client", new Client());
+		return "inscription";
+	}
+	@RequestMapping(value = "/sing_in", method = RequestMethod.GET)
+	public String sing_in(@ModelAttribute("client") Client p) {
+		if(p.getIdClient() == BigInteger.ZERO){
+			//new client, add it
+				this.clientService.addClient(p);
+		}else{
+				//existing client, call update
+				this.clientService.updateClient(p);
+			}
+		
+			return "redirect:/clients";
 	}
 	
 	@RequestMapping(value = "/clients", method = RequestMethod.GET)
@@ -57,16 +76,16 @@ public class ClientController {
 	@RequestMapping(value= "/client/add", method = RequestMethod.POST)
 	public String addClient(@ModelAttribute("client") Client p){
 		
-		if(p.getIdClient() == 0){
-			//new client, add it
+	if(p.getIdClient() == BigInteger.ZERO){
+		//new client, add it
 			this.clientService.addClient(p);
-		}else{
-			//existing client, call update
+	}else{
+//			//existing client, call update
 			this.clientService.updateClient(p);
 		}
-		
+//		
 		return "redirect:/clients";
-		
+//		
 	}
 	
 	@RequestMapping("client/{id}/remove")

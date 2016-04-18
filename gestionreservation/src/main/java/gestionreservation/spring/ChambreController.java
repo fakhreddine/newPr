@@ -45,7 +45,7 @@ public class ChambreController {
 	public String addChambre(@ModelAttribute("chambre") Chambre p) {
 	//public String addChambre(@ModelAttribute("chambre") Chambre p){
 		
-		if(p.getIdChambre() == 0){
+		if(p.getIdChambre() == "0"){
 			//new person, add it
 			this.chambreService.addChambre(p);
 		}else{

@@ -35,7 +35,7 @@
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
-			value="jdbc:mysql://127.0.0.1/gresevationhotel" />
+			value="jdbc:mysql://127.0.0.1/greservation1" />
 		<beans:property name="username" value="root" />
 		<beans:property name="password" value="" />
 	</beans:bean>
@@ -46,12 +46,21 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
+				<beans:value>gestionreservation.spring.model.Agent</beans:value>
 				<beans:value>gestionreservation.spring.model.Categorie</beans:value>
 				<beans:value>gestionreservation.spring.model.Chambre</beans:value>
 				<beans:value>gestionreservation.spring.model.Client</beans:value>
-				<beans:value>gestionreservation.spring.model.Reservation</beans:value>
+				<beans:value>gestionreservation.spring.model.Admin</beans:value>
 				<beans:value>gestionreservation.spring.model.Facture</beans:value>
-				<beans:value>gestionreservation.spring.model.Agent</beans:value>
+				<beans:value>gestionreservation.spring.model.Hotel</beans:value>
+				<beans:value>gestionreservation.spring.model.Offre</beans:value>
+				<beans:value>gestionreservation.spring.model.Pension</beans:value>
+				<beans:value>gestionreservation.spring.model.Personne</beans:value>
+				<beans:value>gestionreservation.spring.model.Reservation</beans:value>		
+				<beans:value>gestionreservation.spring.model.Saison</beans:value>
+				<beans:value>gestionreservation.spring.model.Serviceconsommation</beans:value>
+				<beans:value>gestionreservation.spring.model.Typechambre</beans:value>
+				<beans:value>gestionreservation.spring.model.Utilisateur</beans:value>	
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -59,11 +68,14 @@
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
 				</beans:prop>
 				<beans:prop key="hibernate.show_sql">true</beans:prop>
-				<!--  <beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop> -->
-			</beans:props>
+				<beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop>			
+				</beans:props>
 		</beans:property>
 	</beans:bean>
 	<!-- <beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop> -->
+	<beans:bean id="agentDAO" class="gestionreservation.spring.dao.AgentDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
 	<beans:bean id="categorieDAO" class="gestionreservation.spring.dao.CategorieDAOImpl">
 		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
@@ -73,14 +85,42 @@
 	<beans:bean id="clientDAO" class="gestionreservation.spring.dao.ClientDAOImpl">
 		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
+	<beans:bean id="factureDAO" class="gestionreservation.spring.dao.FactureDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="hotelDAO" class="gestionreservation.spring.dao.HotelDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="offreDAO" class="gestionreservation.spring.dao.OffreDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="pensionDAO" class="gestionreservation.spring.dao.PensionDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="personneDAO" class="gestionreservation.spring.dao.PersonneDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
 	<beans:bean id="reservationDAO" class="gestionreservation.spring.dao.ReservationDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="saisonDAO" class="gestionreservation.spring.dao.SaisonDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="serviceconsommationDAO" class="gestionreservation.spring.dao.ServiceconsommationDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="typechambreDAO" class="gestionreservation.spring.dao.TypechambreDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="utilisateurDAO" class="gestionreservation.spring.dao.UtilisateurDAOImpl">
 		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
 	
 	
 	
-	
-	
+	<beans:bean id="agentService" class="gestionreservation.spring.service.AgentServiceImpl">
+		<beans:property name="agentDAO" ref="agentDAO"></beans:property>
+	</beans:bean>
 	<beans:bean id="categorieService" class="gestionreservation.spring.service.CategorieServiceImpl">
 		<beans:property name="categorieDAO" ref="categorieDAO"></beans:property>
 	</beans:bean>
@@ -90,9 +130,37 @@
 	<beans:bean id="clientService" class="gestionreservation.spring.service.ClientServiceImpl">
 		<beans:property name="clientDAO" ref="clientDAO"></beans:property>
 	</beans:bean>
+	<beans:bean id="factureService" class="gestionreservation.spring.service.FactureServiceImpl">
+		<beans:property name="factureDAO" ref="factureDAO"></beans:property>
+	</beans:bean>
+	<beans:bean id="hotelService" class="gestionreservation.spring.service.HotelServiceImpl">
+		<beans:property name="hotelDAO" ref="hotelDAO"></beans:property>
+	</beans:bean>
+	<beans:bean id="offreService" class="gestionreservation.spring.service.OffreServiceImpl">
+		<beans:property name="offreDAO" ref="offreDAO"></beans:property>
+	</beans:bean>
+	<beans:bean id="pensionService" class="gestionreservation.spring.service.PensionServiceImpl">
+		<beans:property name="pensionDAO" ref="pensionDAO"></beans:property>
+	</beans:bean>
+	<beans:bean id="personneService" class="gestionreservation.spring.service.PersonneServiceImpl">
+		<beans:property name="personneDAO" ref="personneDAO"></beans:property>
+	</beans:bean>
 	<beans:bean id="reservationService" class="gestionreservation.spring.service.ReservationServiceImpl">
 		<beans:property name="reservationDAO" ref="reservationDAO"></beans:property>
 	</beans:bean>
+	<beans:bean id="saisonService" class="gestionreservation.spring.service.SaisonServiceImpl">
+		<beans:property name="saisonDAO" ref="saisonDAO"></beans:property>
+	</beans:bean>
+	<beans:bean id="serviceconsommationService" class="gestionreservation.spring.service.ServiceconsommationServiceImpl">
+		<beans:property name="serviceconsommationDAO" ref="serviceconsommationDAO"></beans:property>
+	</beans:bean>
+	<beans:bean id="typechambreService" class="gestionreservation.spring.service.TypechambreServiceImpl">
+		<beans:property name="typechambreDAO" ref="typechambreDAO"></beans:property>
+	</beans:bean>
+	<beans:bean id="utilisateurService" class="gestionreservation.spring.service.UtilisateurServiceImpl">
+		<beans:property name="utilisateurDAO" ref="utilisateurDAO"></beans:property>
+	</beans:bean>
+	
 	<context:component-scan base-package="gestionreservation.spring" />
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>

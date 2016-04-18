@@ -27,6 +27,7 @@ public class CategorieController {
 	
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
 	public String listCategories(Model model) {
+		
 		model.addAttribute("categorie", new Categorie());
 		model.addAttribute("listCategories", this.categorieService.listCategories());
 		return "categorie";
@@ -48,19 +49,19 @@ public class CategorieController {
 	}
 //	
 //	//For add and update person both
-//		@RequestMapping(value= "/categorie/add", method = RequestMethod.POST)
-//		public String addCategorie(@ModelAttribute("categorie") Categorie p){
+	@RequestMapping(value= "/categorie/add1", method = RequestMethod.POST)
+	public String addCategorie1(@ModelAttribute("categorie") Categorie p){
+		
+			if(p.getIdCategorie() == 0){
+				//new person, add it
+				this.categorieService.addCategorie(p);
+			}else{
+				//existing person, call update
+				this.categorieService.updateCategorie(p);
+			}
+		return "redirect:/categories";
 //			
-//			if(p.getIdCategorie() == 0){
-//				//new person, add it
-//				this.categorieService.addCategorie(p);
-//			}else{
-//				//existing person, call update
-//				this.categorieService.updateCategorie(p);
-//			}
-//			return "redirect:/categories";
-//			
-//		}
+	}
 	
 	@RequestMapping("/categorie/{idCategorie}/remove")
     public String removeCategorie(@PathVariable("idCategorie") int id){

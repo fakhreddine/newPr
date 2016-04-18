@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -11,15 +12,13 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="facture")
 @NamedQuery(name="Facture.findAll", query="SELECT f FROM Facture f")
 public class Facture implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
-	private int idFacture;
+	private String idFacture;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateFacture;
@@ -27,21 +26,24 @@ public class Facture implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datePaiement;
 
-	@Column(precision=10)
 	private BigDecimal montantFacture;
 
-	//bi-directional one-to-one association to Reservation
-	@OneToOne(mappedBy="facture")
-	private Reservation reservation;
+	//bi-directional many-to-one association to Reservation
+	@OneToMany(mappedBy="facture")
+	private List<Reservation> reservations;
+
+	//bi-directional many-to-one association to Serviceconsommation
+	@OneToMany(mappedBy="facture")
+	private List<Serviceconsommation> serviceconsommations;
 
 	public Facture() {
 	}
 
-	public int getIdFacture() {
+	public String getIdFacture() {
 		return this.idFacture;
 	}
 
-	public void setIdFacture(int idFacture) {
+	public void setIdFacture(String idFacture) {
 		this.idFacture = idFacture;
 	}
 
@@ -69,12 +71,48 @@ public class Facture implements Serializable {
 		this.montantFacture = montantFacture;
 	}
 
-	public Reservation getReservation() {
-		return this.reservation;
+	public List<Reservation> getReservations() {
+		return this.reservations;
 	}
 
-	public void setReservation(Reservation reservation) {
-		this.reservation = reservation;
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public Reservation addReservation(Reservation reservation) {
+		getReservations().add(reservation);
+		reservation.setFacture(this);
+
+		return reservation;
+	}
+
+	public Reservation removeReservation(Reservation reservation) {
+		getReservations().remove(reservation);
+		reservation.setFacture(null);
+
+		return reservation;
+	}
+
+	public List<Serviceconsommation> getServiceconsommations() {
+		return this.serviceconsommations;
+	}
+
+	public void setServiceconsommations(List<Serviceconsommation> serviceconsommations) {
+		this.serviceconsommations = serviceconsommations;
+	}
+
+	public Serviceconsommation addServiceconsommation(Serviceconsommation serviceconsommation) {
+		getServiceconsommations().add(serviceconsommation);
+		serviceconsommation.setFacture(this);
+
+		return serviceconsommation;
+	}
+
+	public Serviceconsommation removeServiceconsommation(Serviceconsommation serviceconsommation) {
+		getServiceconsommations().remove(serviceconsommation);
+		serviceconsommation.setFacture(null);
+
+		return serviceconsommation;
 	}
 
 }

@@ -10,38 +10,69 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="chambre")
 @NamedQuery(name="Chambre.findAll", query="SELECT c FROM Chambre c")
 public class Chambre implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
-	private long idChambre;
+	private String idChambre;
+
+	private boolean activer;
 
 	private int numChambre;
 
 	private int telChambre;
 
-	//bi-directional many-to-many association to Reservation
-	@ManyToMany(mappedBy="chambres")
-	private List<Reservation> reservations;
-
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
-	@JoinColumn(name="idCategorie", nullable=false)
+	@JoinColumn(name="idCategorie")
 	private Categorie categorie;
+
+	//bi-directional many-to-one association to Hotel
+	@ManyToOne
+	@JoinColumn(name="idHotel")
+	private Hotel hotel;
+
+	//bi-directional many-to-many association to Reservation
+	@ManyToMany
+	@JoinTable(
+		name="regroupe"
+		, joinColumns={
+			@JoinColumn(name="idChambre")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="idReservation")
+			}
+		)
+	private List<Reservation> reservations;
+
+	//bi-directional many-to-one association to Typechambre
+	@ManyToOne
+	@JoinColumn(name="idType")
+	private Typechambre typechambre;
+
+	//bi-directional many-to-one association to Offre
+	@OneToMany(mappedBy="chambre")
+	private List<Offre> offres;
 
 	public Chambre() {
 	}
 
-	public long getIdChambre() {
+	public String getIdChambre() {
 		return this.idChambre;
 	}
 
-	public void setIdChambre(long idChambre) {
+	public void setIdChambre(String idChambre) {
 		this.idChambre = idChambre;
+	}
+
+	public boolean getActiver() {
+		return this.activer;
+	}
+
+	public void setActiver(boolean activer) {
+		this.activer = activer;
 	}
 
 	public int getNumChambre() {
@@ -60,6 +91,22 @@ public class Chambre implements Serializable {
 		this.telChambre = telChambre;
 	}
 
+	public Categorie getCategorie() {
+		return this.categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public Hotel getHotel() {
+		return this.hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
 	public List<Reservation> getReservations() {
 		return this.reservations;
 	}
@@ -68,12 +115,34 @@ public class Chambre implements Serializable {
 		this.reservations = reservations;
 	}
 
-	public Categorie getCategorie() {
-		return this.categorie;
+	public Typechambre getTypechambre() {
+		return this.typechambre;
 	}
 
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
+	public void setTypechambre(Typechambre typechambre) {
+		this.typechambre = typechambre;
+	}
+
+	public List<Offre> getOffres() {
+		return this.offres;
+	}
+
+	public void setOffres(List<Offre> offres) {
+		this.offres = offres;
+	}
+
+	public Offre addOffre(Offre offre) {
+		getOffres().add(offre);
+		offre.setChambre(this);
+
+		return offre;
+	}
+
+	public Offre removeOffre(Offre offre) {
+		getOffres().remove(offre);
+		offre.setChambre(null);
+
+		return offre;
 	}
 
 }

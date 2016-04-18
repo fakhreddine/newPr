@@ -36,12 +36,12 @@
 	</c:if>
 	<tr>
 		<td>
-			<form:label path="description">
+			<form:label path="descriptionCatgorie">
 				<spring:message text="Description"/>
 			</form:label>
 		</td>
 		<td>
-			<form:input path="description" />
+			<form:input path="descriptionCatgorie" />
 		</td> 
 	</tr>
 	<tr>
@@ -71,7 +71,7 @@
 	<c:forEach items="${listCategories}" var="categorie">
 		<tr>
 			<td>${categorie.idCategorie}</td>
-			<td>${categorie.description}</td>
+			<td>${categorie.descriptionCatgorie}</td>
 			<td><a href="<c:url value='/categorie/${categorie.idCategorie}/edit' />" >Edit</a></td>
 			<td><a href="<c:url value='/categorie/${categorie.idCategorie}/remove' />" >Delete</a></td>
 		</tr>
