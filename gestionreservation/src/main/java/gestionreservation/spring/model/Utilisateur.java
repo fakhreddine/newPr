@@ -16,7 +16,7 @@ public class Utilisateur extends Personne {
 	private static final long serialVersionUID = 1L;
 
 	 @Column(name = "idUtilisateur")
-	private BigInteger idUtilisateur;
+	private String idUtilisateur;
 	 @Column(name = "login")
 	private String login;
 	 @Column(name = "motDePass")
@@ -29,11 +29,11 @@ public class Utilisateur extends Personne {
 	public Utilisateur() {
 	}
 
-	public BigInteger getIdUtilisateur() {
+	public String getIdUtilisateur() {
 		return this.idUtilisateur;
 	}
 
-	public void setIdUtilisateur(BigInteger idUtilisateur) {
+	public void setIdUtilisateur(String idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
 	}
 

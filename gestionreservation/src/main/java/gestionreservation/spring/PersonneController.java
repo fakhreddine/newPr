@@ -36,7 +36,7 @@ public class PersonneController {
 	public String listPersonnes(Model model) {
 		model.addAttribute("personne", new Personne());
 		model.addAttribute("listPersonnes", this.personneService.listPersonnes());
-		return "personne";
+		return "personnes";
 	}
 	
 	//For add and update person both

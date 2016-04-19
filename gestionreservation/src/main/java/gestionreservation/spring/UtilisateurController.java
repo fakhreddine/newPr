@@ -33,11 +33,13 @@ public class UtilisateurController {
 		this.utilisateurService = ps;
 	}
 	
-	@RequestMapping(value = "/utilisateurs", method = RequestMethod.GET)
-	public String listUtilisateurs(Model model) {
-		model.addAttribute("utilisateur", new Utilisateur());
-		model.addAttribute("listUtilisateurs", this.utilisateurService.listUtilisateurs());
-		return "utilisateur";
+	@RequestMapping(value = "/inscription1", method = RequestMethod.GET)
+	public String testinscription(Model model) {
+		return "testinscription";
+	}
+	@RequestMapping(value = "/booking", method = RequestMethod.GET)
+	public String booking(Model model) {
+		return "booking";
 	}
 	
 	//For add and update person both

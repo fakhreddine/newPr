@@ -46,6 +46,7 @@ public class Personne implements Serializable {
 	private List<Serviceconsommation> serviceconsommations;
 
 	public Personne() {
+		this.idPersonne="0";
 	}
 
 	public String getIdPersonne() {

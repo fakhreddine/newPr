@@ -23,9 +23,7 @@ public class ReservationController {
 		this.reservationService = ps;
 	}
 	
-	
-	
-	
+
 	
 	@RequestMapping(value = "/reservations", method = RequestMethod.GET)
 	public String listReservations(Model model) {

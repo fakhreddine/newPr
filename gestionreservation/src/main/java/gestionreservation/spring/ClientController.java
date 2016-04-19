@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import gestionreservation.spring.model.Client;
+import gestionreservation.spring.model.Reservation;
 import gestionreservation.spring.service.ClientService;
 
 @Controller
@@ -24,6 +25,8 @@ public class ClientController {
 	public void setClientService(ClientService ps){
 		this.clientService = ps;
 	}
+	
+	
 	@RequestMapping(value = "/inscription", method = RequestMethod.GET)
 	public String inscription(Model model) {
 		model.addAttribute("client", new Client());
@@ -52,6 +55,10 @@ public class ClientController {
 	public String admin1(Model model) {
 		return "admin/index";
 	}
+	@RequestMapping(value = "/reserver", method = RequestMethod.GET)
+	public String resever(Model model) {
+		return "reservation";
+	}	
 	
 	@RequestMapping(value = "/h", method = RequestMethod.GET)
 	public String h(Model model) {
