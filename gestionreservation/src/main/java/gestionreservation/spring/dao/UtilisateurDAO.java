@@ -1,5 +1,6 @@
 package gestionreservation.spring.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gestionreservation.spring.model.Utilisateur;
@@ -11,5 +12,6 @@ public interface UtilisateurDAO {
 	public List<Utilisateur> listUtilisateurs();
 	public Utilisateur getUtilisateurById(int id);
 	public void removeUtilisateur(int id);
+	public Utilisateur loadUserByUsername(String useremail);
 }
 

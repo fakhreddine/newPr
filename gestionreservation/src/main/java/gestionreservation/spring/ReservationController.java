@@ -14,53 +14,70 @@ import gestionreservation.spring.service.ReservationService;
 
 @Controller
 public class ReservationController {
-	
+
 	private ReservationService reservationService;
-	
-	@Autowired(required=true)
-	@Qualifier(value="reservationService")
-	public void setReservationService(ReservationService ps){
+
+	@Autowired(required = true)
+	@Qualifier(value = "reservationService")
+	public void setReservationService(ReservationService ps) {
 		this.reservationService = ps;
 	}
-	
 
-	
+	@RequestMapping(value = "/reserve", method = RequestMethod.GET)
+	public String resever(Model model) {
+		return "reservation";
+	}
+
 	@RequestMapping(value = "/reservations", method = RequestMethod.GET)
 	public String listReservations(Model model) {
 		model.addAttribute("reservation", new Reservation());
 		model.addAttribute("listReservations", this.reservationService.listReservations());
+		return "reservations";
+	}
+
+	@RequestMapping("/reservation/{id}/remove")
+	public String removeReservation(@PathVariable("id") int id) {
+
+		this.reservationService.removeReservation(id);
+		return "redirect:/reservations";
+	}
+
+	@RequestMapping("/reservation/{id}/edit")
+	public String editReservation(@PathVariable("id") int id, Model model) {
+		model.addAttribute("reservation", this.reservationService.getReservationById(id));
+		model.addAttribute("listReservations", this.reservationService.listReservations());
 		return "reservation";
 	}
-	
-	//For add and update reservation both
-	@RequestMapping(value= "/reservation/add", method = RequestMethod.POST)
-	public String addReservation(@ModelAttribute("reservation") Reservation p){
-		
-		if(p.getIdReservation() == "0"){
-			//new reservation, add it
+
+
+	/* les etapes de reservation */
+	@RequestMapping("/reservation/new")
+	public String newReservation(Model model) {
+		model.addAttribute("reservation", new Reservation());
+		return "client/reservation";
+	}
+	@RequestMapping("/reservation/new1")
+	public String newReservationtest(Model model) {
+		model.addAttribute("reservation", new Reservation());
+		return "client/testreservation";
+	}
+	@RequestMapping(value = "/reservation/add", method = RequestMethod.POST)
+	public String addReservation(@ModelAttribute("reservation") Reservation p) {
+		if (p.getIdReservation() == "") {
+			// new reservation, add it
 			this.reservationService.addReservation(p);
-		}else{
-			//existing reservation, call update
+		} else {
+			// existing reservation, call update
 			this.reservationService.updateReservation(p);
 		}
-		
-		return "redirect:/reservations";
-		
-	}
-	
-	@RequestMapping("/reservation/{id}/remove")
-    public String removeReservation(@PathVariable("id") int id){
-		
-        this.reservationService.removeReservation(id);
-        return "redirect:/reservations";
-    }
- 
-    @RequestMapping("/reservation/{id}/edit")
-    public String editReservation(@PathVariable("id") int id, Model model){
-        model.addAttribute("reservation", this.reservationService.getReservationById(id));
-        model.addAttribute("listReservations", this.reservationService.listReservations());
-        return "reservation";
-    }
-	
-}
+		Reservation r=p;
+		return "redirect:/client/reservation";
 
+	}
+	@RequestMapping("/reservation/{id}")
+	public String setreservation(@PathVariable("id") int id, Model model) {
+		model.addAttribute("reservation", this.reservationService.getReservationById(id));
+		return "client/reservation";
+	}
+
+}

@@ -2,6 +2,9 @@ package gestionreservation.spring.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.List;
 
 
@@ -15,14 +18,23 @@ public class Chambre implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String idChambre;
 
 	private boolean activer;
 
 	private int numChambre;
-
+	private int nbPlace;
 	private int telChambre;
+
+	public int getNbPlace() {
+		return nbPlace;
+	}
+
+	public void setNbPlace(int nbPlace) {
+		this.nbPlace = nbPlace;
+	}
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne

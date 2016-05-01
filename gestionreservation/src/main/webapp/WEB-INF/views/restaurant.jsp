@@ -34,7 +34,7 @@
         <div class="header-box-small">
           <div class="inner">
             <ul class="nav">
-              <li><a href="index.html">Home page</a></li>
+              <li><a href="index.html">Home</a></li>
               <li><a href="services.html">Services</a></li>
               <li><a href="gallery.html">Gallery</a></li>
               <li><a href="restaurant.html" class="current">Restaurant</a></li>

@@ -2,45 +2,62 @@ package gestionreservation.spring.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gestionreservation.spring.dao.UtilisateurDAO;
+import gestionreservation.spring.dao.UtilisateurDAOImpl;
 import gestionreservation.spring.model.Utilisateur;
 
 @Service
-public class UtilisateurServiceImpl implements UtilisateurService {
+
+public class UtilisateurServiceImpl implements UserDetailsService {
 	
-	private UtilisateurDAO utilisateurDAO;
-
-	public void setUtilisateurDAO(UtilisateurDAO utilisateurDAO) {
+	@Autowired
+	private UtilisateurDAOImpl utilisateurDAO;
+	
+	@Transactional
+	public UtilisateurDAOImpl getUtilisateurDAO() {
+		return utilisateurDAO;
+	}
+	@Transactional
+	public void setUtilisateurDAO(UtilisateurDAOImpl utilisateurDAO) {
 		this.utilisateurDAO = utilisateurDAO;
-	}
-
+	}      
 	@Transactional
+	@Override
+	public Utilisateur loadUserByUsername(String username) throws UsernameNotFoundException {
+		return utilisateurDAO.loadUserByUsername(username);
+	}
+	
 	public void addUtilisateur(Utilisateur p) {
-		this.utilisateurDAO.addUtilisateur(p);
+		utilisateurDAO.addUtilisateur(p);
+		
 	}
 
-	@Transactional
 	public void updateUtilisateur(Utilisateur p) {
-		this.utilisateurDAO.updateUtilisateur(p);
+		utilisateurDAO.updateUtilisateur(p);
 	}
 
-	@Transactional
 	public List<Utilisateur> listUtilisateurs() {
-		return this.utilisateurDAO.listUtilisateurs();
+		
+		return utilisateurDAO.listUtilisateurs();
 	}
 
-	@Transactional
 	public Utilisateur getUtilisateurById(int id) {
-		return this.utilisateurDAO.getUtilisateurById(id);
+		
+	 return utilisateurDAO.getUtilisateurById(id);
 	}
 
-	@Transactional
 	public void removeUtilisateur(int id) {
-		this.utilisateurDAO.removeUtilisateur(id);
+		utilisateurDAO.removeUtilisateur(id);
+		
 	}
+	
 
 }
 

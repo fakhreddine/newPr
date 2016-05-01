@@ -19,7 +19,7 @@
 
 <c:url var="addAction" value="/categorie/add" ></c:url>
 
-<form:form action="${addAction}" commandName="categorie">
+<form:form action="${addAction}" commandName="categorie" method="post">
 <table>
 	<c:if test="${categorie.idCategorie!=0}">
 	<tr>

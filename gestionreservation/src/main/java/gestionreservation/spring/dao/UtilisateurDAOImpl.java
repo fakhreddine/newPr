@@ -1,5 +1,6 @@
 package gestionreservation.spring.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,10 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import gestionreservation.spring.model.Role;
+import gestionreservation.spring.model.Typechambre;
 import gestionreservation.spring.model.Utilisateur;
 
 @Repository
-public class UtilisateurDAOImpl implements UtilisateurDAO {
+public class UtilisateurDAOImpl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UtilisateurDAOImpl.class);
 
@@ -21,6 +24,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		this.sessionFactory = sf;
 	}
 
+	
+
+	
+	
 	public void addUtilisateur(Utilisateur p) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(p);
@@ -52,12 +59,35 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	}
 
 	public void removeUtilisateur(int id) {
-		Session session = this.sessionFactory.getCurrentSession();
+	Session session = this.sessionFactory.getCurrentSession();
 		Utilisateur p = (Utilisateur) session.load(Utilisateur.class, new Integer(id));
 		if(null != p){
 			session.delete(p);
 		}
 		logger.info("Utilisateur deleted successfully, utilisateur details="+p);
 	}
+	@SuppressWarnings("unchecked")
 
+	public Utilisateur loadUserByUsername(final String login) {
+		Utilisateur u=new Utilisateur();
+		u.setLogin("gest");
+		u.setEmailPers("gest");
+		u.setMotDePass("gest");
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Utilisateur> utilisateursList = session.createQuery("from Utilisateur where login='"+login+"' OR emailPers='"+login+"'").list();
+		
+		List<Role> rolesList = session.createQuery("from Role where descriptionRole='ADMIN'").list();
+		for(Utilisateur p : utilisateursList){
+			logger.info("Utilisateur List::"+p);
+		}
+		try{
+			if(utilisateursList.get(0)!=null)
+			u=utilisateursList.get(0);
+			u.setRoles(rolesList);}catch(Exception e)
+		{
+				
+		}
+		return u;
+	
+    }
 }

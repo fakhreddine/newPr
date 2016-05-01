@@ -2,6 +2,7 @@ package gestionreservation.spring.service;
 
 import java.util.List;
 
+import gestionreservation.spring.model.Typechambre;
 import gestionreservation.spring.model.Utilisateur;
 
 

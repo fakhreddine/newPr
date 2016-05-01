@@ -1,140 +1,120 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Five Star Hotel</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<%=request.getContextPath()%>/resources/five-star-hotel/css/style.css" rel="stylesheet" type="text/css" />
-<link href="<%=request.getContextPath()%>/resources/five-star-hotel/css/layout.css" rel="stylesheet" type="text/css" />
-<script src="<%=request.getContextPath()%>/resources/five-star-hotel/js/maxheight.js" type="text/javascript"></script>
-<!--[if lt IE 7]>
-<link href="ie_style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="ie_png.js"></script>
-<script type="text/javascript">ie_png.fix('.png, #header .row-2, #header .nav li a, #content, .gallery li');</script>
-<![endif]-->
+<link
+	href="<%=request.getContextPath()%>/resources/navbar/css/font-awesome.min.css"
+	rel="stylesheet">
+	<link rel="stylesheet"
+		href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet"
+			href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap-responsive.css">
+
+			<link rel="stylesheet"
+				href="<%=request.getContextPath()%>/resources/inscription/css/inscription.css">
+				<link rel="stylesheet"
+					href="<%=request.getContextPath()%>/resources/navbar/css/navbar.css">
 </head>
-<body id="page1" onload="new ElementMaxHeight();">
-<div id="main">
-  <!-- header -->
-  <div id="header">
-    <div class="row-1">
-      <div class="wrapper">
-        <div class="logo">
-          <h1><a href="#">Five Star</a></h1>
-          <em>Hotel</em> <strong>True Luxury</strong> </div>
-        <div class="phones"> 1-800-412-45-56<br />
-          1-800-542-64-48 </div>
-      </div>
-    </div>
-    <div class="row-2">
-      <div class="indent">
-        <!-- header-box begin -->
-        <div class="header-box">
-          <div class="inner">
-            <ul class="nav">
-              <li><a href="index.jsp" class="current">Home page</a></li>
-              <li><a href="services.jsp">Services</a></li>
-              <li><a href="gallery.jsp">Gallery</a></li>
-              <li><a href="restaurant.jsp">Restaurant</a></li>
-              <li><a href="testimonials.jsp">Testimonials</a></li>
-              <li><a href="booking.jsp">Booking</a></li>
-            </ul>
-          </div>
-        </div>
-        <!-- header-box end -->
-      </div>
-    </div>
-  </div>
-  <!-- content -->
-  <div id="content">
-    <div class="wrapper">
-      <div class="aside maxheight">
-        <!-- box begin -->
-        <div class="box maxheight">
-          <div class="inner">
-            <h3>Reservation:</h3>
-            <form action="#" id="reservation-form">
-              <fieldset>
-              <div class="field">
-                <label>Check In:</label>
-                <select class="select1">
-                  <option>30</option>
-                </select>
-                <select class="select2">
-                  <option>April 2009</option>
-                </select>
-              </div>
-              <div class="field">
-                <label>Check Out:</label>
-                <select class="select1">
-                  <option>01</option>
-                </select>
-                <select class="select2">
-                  <option>May 2009</option>
-                </select>
-              </div>
-              <div class="field"> Persons: &nbsp;
-                <input type="text" value="1"/>
-&nbsp; &nbsp; &nbsp; &nbsp; Rooms:&nbsp;
-                <input type="text" value="1"/>
-              </div>
-              <div class="button"><span><span><a href="#">Check Availability</a></span></span></div>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-        <!-- box end -->
-      </div>
-      <div class="content">
-        <div class="indent">
-          <h2>FiveStar is happy to welcome you!</h2>
-          <img class="img-indent png" alt="" src="images/1page-img1.png" />
-          <p class="alt-top">Come alone or bring your family with you, stay here for a night or for weeks, stay here while on business trip or at some kind of conference - either way our hotel is the best possible variant.</p>
-          Feel free to contact us anytime in case you have any questions or concerns.
-          <div class="clear"></div>
-          <div class="line-hor"></div>
-          <div class="wrapper line-ver">
-            <div class="col-1">
-              <h3>Special Offers</h3>
-              <ul>
-                <li>FREE wide-screen TV</li>
-                <li>50% Discount for Restaraunt service</li>
-                <li>30% Discount for 3 days+ orders</li>
-                <li>FREE drinks and beverages in rooms</li>
-                <li>Exclusive souvenirs</li>
-              </ul>
-              <div class="button"><span><span><a href="#">Order Now!</a></span></span></div>
-            </div>
-            <div class="col-2">
-              <h3>Location</h3>
-              <p>We are located in the center of Prague surrounded by malls and boutiques.</p>
-              <dl class="contacts-list">
-                <dt>Gazek st., 210</dt>
-                <dd>1-800-412-4556</dd>
-                <dd>1-800-542-6448</dd>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- footer -->
-  <div id="footer">
-    <ul class="nav">
-      <li><a href="#">Home</a>|</li>
-      <li><a href="#">Services</a>|</li>
-      <li><a href="#">Gallery</a>|</li>
-      <li><a href="#">Restaurant</a>|</li>
-      <li><a href="#">Testimonials</a>|</li>
-      <li><a href="#">Booking</a></li>
-    </ul>
-    <div class="wrapper">
-      <div class="fleft">Copyright &copy; 2009 <a href="#">Name Here</a>. All Rights Reserved</div>
-      <div class="fright">Designed by TemplateMonster - <a href="http://www.templatemonster.com/">website templates</a> provider</div>
-    </div>
-  </div>
+
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+<div class="container-fluid">
+	<!-- Brand and toggle get grouped for better mobile display -->
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">Hotels</a></li>
+			<li><a href="#">Offres</a></li>
+			<li><a href="./reserve">Reservations</a></li>
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#">A propos</a></li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+				<ul id="login-dp" class="dropdown-menu">
+					<li>
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-body">
+										<ul class="nav nav-tabs final-login">
+											<li class="active"><a data-toggle="tab" href="#sectionA">Sign
+													In</a></li>
+											<li><a data-toggle="tab" href="#sectionB">Join us!</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="sectionA" class="tab-pane fade in active">
+												<div class="innter-form">
+													<form class="sa-innate-form" method="post">
+														<label>Email Address</label>
+														<input type="text" name="username"> <label>Password</label>
+															<input type="password" name="password">
+																<button type="submit">Sign In</button> <a href="">Forgot
+																	Password?</a>
+													</form>
+												</div>
+												<div class="social-login">
+													<p>- - - - - - - - - - - - - Sign In With - - - - - - -
+														- - - - - -</p>
+													<ul>
+														<li><a href=""><i class="fa fa-facebook"></i>
+																Facebook</a></li>
+														<li><a href=""><i class="fa fa-google-plus"></i>
+																Google+</a></li>
+														<li><a href=""><i class="fa fa-twitter"></i>
+																Twitter</a></li>
+													</ul>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<div id="sectionB" class="tab-pane fade">
+												<div class="innter-form">
+													<form class="sa-innate-form" method="post">
+														<label>Name</label>
+														<input type="text" name="username"> <label>Email
+																Address</label> <input type="text" name="username"> <label>Password</label>
+																<input type="password" name="password">
+																	<button type="submit">Join now</button>
+																	<p>By clicking Join now, you agree to hifriends's
+																		User Agreement, Privacy Policy, and Cookie Policy.</p>
+													</form>
+												</div>
+												<div class="social-login">
+													<p>- - - - - - - - - - - - - Register With - - - - - -
+														- - - - - - -</p>
+													<ul>
+														<li><a href=""><i class="fa fa-facebook"></i>
+																Facebook</a></li>
+														<li><a href=""><i class="fa fa-google-plus"></i>
+																Google+</a></li>
+														<li><a href=""><i class="fa fa-twitter"></i>
+																Twitter</a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</li>
+				</ul></li>
+		</ul>
+	</div>
+	<!-- /.navbar-collapse -->
 </div>
+<!-- /.container-fluid --> </nav>
+<script
+	src="<%=request.getContextPath()%>/resources/bootstrap/js/jquery-1.11.1.js"></script>
+<script
+	src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.js"></script>
+<script
+	src="<%=request.getContextPath()%>/resources/inscription/js/inscription.js"></script>
+
 </body>
 </html>

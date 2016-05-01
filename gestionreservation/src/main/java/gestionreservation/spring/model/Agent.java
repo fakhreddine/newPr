@@ -23,10 +23,10 @@ public class Agent extends Utilisateur{
 	private BigDecimal salaire;
 
 	//bi-directional many-to-one association to Hotel
-	@ManyToOne
+/*	@ManyToOne
 	@JoinColumn(name="idHotel")
 	private Hotel hotel;
-
+*/
 	//bi-directional many-to-one association to Reservation
 	@OneToMany(mappedBy="agent")
 	private List<Reservation> reservations;
@@ -58,14 +58,7 @@ public class Agent extends Utilisateur{
 		this.salaire = salaire;
 	}
 
-	public Hotel getHotel() {
-		return this.hotel;
-	}
-
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
-	}
-
+	
 
 	public List<Reservation> getReservations() {
 		return this.reservations;

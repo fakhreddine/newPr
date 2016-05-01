@@ -18,7 +18,18 @@ public class Categorie implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idCategorie;
 
+	private String labelCatgorie;
+	@Column(columnDefinition = "text")
 	private String descriptionCatgorie;
+	
+	public String getLabelCatgorie() {
+		return labelCatgorie;
+	}
+
+	public void setLabelCatgorie(String labelCatgorie) {
+		this.labelCatgorie = labelCatgorie;
+	}
+	
 
 	//bi-directional many-to-one association to Chambre
 	@OneToMany(mappedBy="categorie")

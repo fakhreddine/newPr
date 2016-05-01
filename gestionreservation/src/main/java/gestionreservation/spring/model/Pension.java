@@ -17,8 +17,18 @@ public class Pension implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idPension;
-
+	private String labelPension;
+	@Column(columnDefinition = "text")
 	private String descriptionPension;
+	
+	
+	public String getLabelPension() {
+		return labelPension;
+	}
+
+	public void setLabelPension(String labelPension) {
+		this.labelPension = labelPension;
+	}
 
 	//bi-directional many-to-one association to Offre
 	@OneToMany(mappedBy="pension")

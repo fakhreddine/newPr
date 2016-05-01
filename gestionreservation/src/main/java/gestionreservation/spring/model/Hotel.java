@@ -2,54 +2,106 @@ package gestionreservation.spring.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import java.util.List;
 
 /**
  * The persistent class for the hotel database table.
  * 
  */
 @Entity
-@NamedQuery(name="Hotel.findAll", query="SELECT h FROM Hotel h")
+@NamedQuery(name = "Hotel.findAll", query = "SELECT h FROM Hotel h")
 public class Hotel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idHotel;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String idHotel;
+
+	private String nomHotel;
+
+	private String emailHotel;
 
 	private String adresseHotel;
 
 	private int codePostalHotel;
 
-	private int faxHotel;
+	private String faxHotel;
 
-	private String nomHotel;
+	@Column(columnDefinition = "text")
+	private String descriptionHotel;
 
-	private int telHotel;
+	private String telHotel;
 
 	private String villeHotel;
 
-	//bi-directional many-to-one association to Agent
-	@OneToMany(mappedBy="hotel")
-	private List<Agent> agents;
+	
+	public String getEmailHotel() {
+		return emailHotel;
+	}
 
-	//bi-directional many-to-one association to Chambre
-	@OneToMany(mappedBy="hotel")
+	public void setEmailHotel(String emailHotel) {
+		this.emailHotel = emailHotel;
+	}
+
+	public String getFaxHotel() {
+		return faxHotel;
+	}
+
+	public void setFaxHotel(String faxHotel) {
+		this.faxHotel = faxHotel;
+	}
+
+	public String getTelHotel() {
+		return telHotel;
+	}
+
+	public void setTelHotel(String telHotel) {
+		this.telHotel = telHotel;
+	}
+
+	public String getDescriptionHotel() {
+		return descriptionHotel;
+	}
+
+	public void setDescriptionHotel(String descriptionHotel) {
+		this.descriptionHotel = descriptionHotel;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "hotel")
+	private Utilisateur directeur;
+
+	public Utilisateur getDirecteur() {
+		return directeur;
+	}
+
+	public void setDirecteur(Utilisateur directeur) {
+		this.directeur = directeur;
+	}
+
+	// bi-directional many-to-one association to Agent
+	/*
+	 * @OneToMany(mappedBy="hotel") private List<Agent> agents;
+	 */
+	// bi-directional many-to-one association to Chambre
+	@OneToMany(mappedBy = "hotel")
 	private List<Chambre> chambres;
 
-	//bi-directional many-to-one association to Offre
-	@OneToMany(mappedBy="hotel")
+	// bi-directional many-to-one association to Offre
+	@OneToMany(mappedBy = "hotel")
 	private List<Offre> offres;
 
 	public Hotel() {
 	}
 
-	public int getIdHotel() {
+	public String getIdHotel() {
 		return this.idHotel;
 	}
 
-	public void setIdHotel(int idHotel) {
+	public void setIdHotel(String idHotel) {
 		this.idHotel = idHotel;
 	}
 
@@ -69,28 +121,12 @@ public class Hotel implements Serializable {
 		this.codePostalHotel = codePostalHotel;
 	}
 
-	public int getFaxHotel() {
-		return this.faxHotel;
-	}
-
-	public void setFaxHotel(int faxHotel) {
-		this.faxHotel = faxHotel;
-	}
-
 	public String getNomHotel() {
 		return this.nomHotel;
 	}
 
 	public void setNomHotel(String nomHotel) {
 		this.nomHotel = nomHotel;
-	}
-
-	public int getTelHotel() {
-		return this.telHotel;
-	}
-
-	public void setTelHotel(int telHotel) {
-		this.telHotel = telHotel;
 	}
 
 	public String getVilleHotel() {
@@ -101,28 +137,22 @@ public class Hotel implements Serializable {
 		this.villeHotel = villeHotel;
 	}
 
-	public List<Agent> getAgents() {
-		return this.agents;
-	}
-
-	public void setAgents(List<Agent> agents) {
-		this.agents = agents;
-	}
-
-	public Agent addAgent(Agent agent) {
-		getAgents().add(agent);
-		agent.setHotel(this);
-
-		return agent;
-	}
-
-	public Agent removeAgent(Agent agent) {
-		getAgents().remove(agent);
-		agent.setHotel(null);
-
-		return agent;
-	}
-
+	/*
+	 * public List<Agent> getAgents() { return this.agents; }
+	 * 
+	 * public void setAgents(List<Agent> agents) { this.agents = agents; }
+	 */
+	/*
+	 * public Agent addAgent(Agent agent) { getAgents().add(agent);
+	 * agent.setHotel(this);
+	 * 
+	 * return agent; }
+	 * 
+	 * public Agent removeAgent(Agent agent) { getAgents().remove(agent);
+	 * agent.setHotel(null);
+	 * 
+	 * return agent; }
+	 */
 	public List<Chambre> getChambres() {
 		return this.chambres;
 	}
