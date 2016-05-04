@@ -12,6 +12,7 @@ import gestionreservation.spring.model.Pension;
 import gestionreservation.spring.model.Reservation;
 import gestionreservation.spring.model.Role;
 import gestionreservation.spring.model.Saison;
+import gestionreservation.spring.model.Typechambre;
 import gestionreservation.spring.model.Utilisateur;
 
 class main {
@@ -46,6 +47,25 @@ class main {
 		cat6.setDescriptionCatgorie("Quelque soit la catégorie de chambre que vous avez choisi de nous réserver, HARMONY, TRADITION, TRIPLE ou FAMILIALE, vous pouvez disposer, avec supplément de prix, d'une chambre donnant sur une belle et grande terrasse privée avec fauteuils, relax et table basse, couverte de parasol ou de tonnelle.Vu le peu de chambre de ce type dont nous disposons, il est impératif d'en faire la demande directement à l'hôtel par mail ou téléphone.Seule la réponse de l'hôtel, par un mail de confirmation, peut en garantir la réservation.Une confirmation de l'hôtel faîte par téléphone n'a aucune valeur.En cas de non réponse de l'hôtel, vous devez réitérer votre demande et surtout ne pas considérer que votre demande a été prise en compte.Le montant du supplément est le suivant:25 euros par jour du 1er mai au 30 septembre 15 euros par jour en avril et octobre 10 euros par jour du 1er novembre au 31 mars Ces tarifs sont identiques quelque soit la catégorie de chambre choisie.   ");
 		session.save(cat6);
 	
+		/*types chambres*/
+		Typechambre tc1=new Typechambre();
+		tc1.setDescriptionType("CHAMBRE JARDIN");
+		session.save(tc1);
+		Typechambre tc2=new Typechambre();
+		tc2.setDescriptionType("CHAMBRE VUE MER");
+		session.save(tc2);
+		Typechambre tc3=new Typechambre();
+		tc3.setDescriptionType("STUDIO VUE MER");
+		session.save(tc3);
+		Typechambre tc4=new Typechambre();
+		tc4.setDescriptionType("Autre");
+		session.save(tc4);
+		
+		
+		
+		
+		
+		
 		/*pension*/
 		Pension pens1=new Pension();
 		pens1.setLabelPension("Tout Inclus / All Inclusive");
@@ -192,6 +212,7 @@ class main {
 		/*Chambre*/
 		Chambre c1 = new Chambre();
 		c1.setCategorie(cat1);
+		c1.setTypechambre(tc1);
 		c1.setActiver(true);
 		c1.setNumChambre(1);
 		c1.setTelChambre(104);
@@ -199,6 +220,7 @@ class main {
 		
 		Chambre c2 = new Chambre();
 		c2.setCategorie(cat2);
+		c1.setTypechambre(tc3);
 		c2.setActiver(true);
 		c2.setNumChambre(1);
 		c2.setTelChambre(145);
@@ -206,6 +228,7 @@ class main {
 		
 		Chambre c3 = new Chambre();
 		c3.setCategorie(cat2);
+		c1.setTypechambre(tc2);
 		c3.setActiver(true);
 		c3.setNumChambre(1);
 		c3.setTelChambre(144);
@@ -213,6 +236,7 @@ class main {
 		
 		Chambre c4 = new Chambre();
 		c4.setCategorie(cat3);
+		c1.setTypechambre(tc1);
 		c4.setActiver(true);
 		c4.setNumChambre(1);
 		c4.setTelChambre(143);
@@ -342,6 +366,7 @@ class main {
 		r1.setChambres(lc1);
 		r1.setNbPersonne(8);
 		r1.setUtilisateur(user3);
+		r1.setArrivee(true);
 		session.save(r1);
 		
 		Reservation r2=new Reservation();
@@ -349,8 +374,18 @@ class main {
 		lc2.add(c2);
 		r2.setChambres(lc2);
 		r2.setNbPersonne(8);
+		r2.setArrivee(true);
 		r2.setUtilisateur(user3);
 		session.save(r2);
+		
+		Reservation r3=new Reservation();
+		List<Chambre> lc3 =new ArrayList<Chambre>();
+		lc3.add(c3);
+		r3.setChambres(lc3);
+		r3.setNbPersonne(4);
+		r3.setArrivee(false);
+		r3.setUtilisateur(user1);
+		session.save(r3);
 		
 		
 		

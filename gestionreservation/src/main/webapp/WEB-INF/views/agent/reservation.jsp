@@ -5,24 +5,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link
-				href="<%=request.getContextPath()%>/resources/navbar/css/font-awesome.min.css"
-				rel="stylesheet" />
-			<link rel="stylesheet"
-				href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.css" />
-			<link rel="stylesheet"
-				href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap-responsive.css" />
-			<link rel="stylesheet"
-				href="<%=request.getContextPath()%>/resources/inscription/css/inscription.css" />
-			<link rel="stylesheet"
-				href="<%=request.getContextPath()%>/resources/navbar/css/navbar.css" />
-			<link rel="stylesheet"
-				href="<%=request.getContextPath()%>/resources/reservation/css/reservation.css" />
-			<link rel="stylesheet"
-				href="<%=request.getContextPath()%>/resources/css/galeriephoto.css" />
+<link
+	href="<%=request.getContextPath()%>/resources/navbar/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap-responsive.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/inscription/css/inscription.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/navbar/css/navbar.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/reservation/css/reservation.css" />
 </head>
 
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -135,26 +130,23 @@
 				<div class="connecting-line"></div>
 				<ul class="nav nav-tabs" role="tablist">
 
-					<c:if test="${reservation.dateDebutSejour!=''}">
-						<li role="presentation" ><a href="#step1"
-							data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
-								<span class="round-tab"> <i
-									class="glyphicon glyphicon glyphicon-user"></i>
-							</span>
-						</a></li>
-					</c:if>
-					
+					<li role="presentation" class="active"><a href="#step1"
+						data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+							<span class="round-tab"> <i
+								class="glyphicon glyphicon-folder-open"></i>
+						</span>
+					</a></li>
 
-					<li role="presentation" class="active"><a href="#step2"
+					<li role="presentation" class="disabled"><a href="#step2"
 						data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
 							<span class="round-tab"> <i
-								class="glyphicon glyphicon-lamp"></i>
+								class="glyphicon glyphicon-pencil"></i>
 						</span>
 					</a></li>
 					<li role="presentation" class="disabled"><a href="#step3"
 						data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
 							<span class="round-tab"> <i
-								class="glyphicon glyphicon-check"></i>
+								class="glyphicon glyphicon-picture"></i>
 						</span>
 					</a></li>
 
@@ -226,155 +218,38 @@
 					<div class="step2">
 						<div class="step_21">
 
-<p class="bg-info">faite le ${reservation.dateReservation}</p>
-
 							<c:url var="addAction" value="/reservation/add"></c:url>
-
 							<form:form action="${addAction}" commandName="reservation"
-								method="post" class="form-horizontal">
-								<div class="row form-group">
-									<div class="col-xs-2">
-										<label for="dateDebutSejour">Date debut de sejour</label>
-									</div>
-									<div class="col-xs-3">
-										<input path="dateDebutSejour" type="date" class="form-control">
-									</div>
-									<div class="col-xs-2">
-										<label for="dateFinSejour">Date fin de sejour</label>
-									</div>
-									<div class="col-xs-3">
-										<input path="dateFinSejour" type="date" class="form-control">
-									</div>
-
-								</div>
-								<div class="form-group">
-									<label for="inputnbPersonne" class="col-sm-2 control-label">nombre
-										de personne</label>
-									<div class="col-sm-10">
-										<input path="nbPersonne" type="number" class="form-control"
-											id="inputnbPersonne" placeholder="nombre de personne">
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-										<c:if test="${reservation.arrivee=='false'}">
-											<button type="submit" class="btn btn-info">Comfirmer
-												l'arriver</button>
-										</c:if>
-										<c:if test="${reservation.idReservation=='true'}">
-											<button type="button" class="btn btn-success">arriver</button>
-										</c:if>
-									</div>
-								</div>
+								method="post">
+								<table>
+									<c:if test="${reservation.idReservation!=0}">
+										<tr>
+											<td><form:label path="idReservation">
+													<spring:message text="ID" />
+												</form:label></td>
+											<td><form:input path="idReservation" readonly="true"
+													size="8" disabled="true" /> <form:hidden
+													path="idReservation" /></td>
+										</tr>
+									</c:if>
+									<tr>
+										<td><form:label path="nbPersonne">
+												<spring:message text="nembre de personne" />
+											</form:label></td>
+										<td><form:input path="nbPersonne" /></td>
+									</tr>
+									<tr>
+										<td colspan="2"><c:if
+												test="${reservation.idReservation!=''}">
+												<input type="submit"
+													value="<spring:message text="Edit Reservation"/>" />
+											</c:if> <c:if test="${reservation.idReservation==''}">
+												<input type="submit"
+													value="<spring:message text="Add Reservation"/>" />
+											</c:if></td>
+									</tr>
+								</table>
 							</form:form>
-
-
-
-							<div class="container">
-								<div class="row">
-									<h1>Bootstrap 3 lightbox hidden gallery using modal</h1>
-									<hr>
-
-										<div class="row">
-
-											<div class="col-12 col-md-4 col-sm-6">
-												<a title="Image 1" href="#"> <img
-													class="thumbnail img-responsive" id="image-1"
-													src="http://dummyimage.com/600x350/ccc/969696&amp;text=0xD10x810xD00xB50xD10x800xD10x8B0xD00xB9"></a>
-											</div>
-
-											<div class="col-12 col-md-4 col-sm-6">
-												<a title="Image 2" href="#"> <img
-													class="thumbnail img-responsive" id="image-2"
-													src="http://dummyimage.com/600x350/2255EE/969696&amp;text=0xD10x810xD00xB80xD00xBD0xD00xB80xD00xB9"></a>
-
-											</div>
-											<div class="col-12 col-md-4 col-sm-6">
-												<a title="Image 3" href="#"> <img
-													class="thumbnail img-responsive" id="image-3"
-													src="http://dummyimage.com/600x350/449955/FFF&amp;text=0xD00xB70xD00xB50xD00xBB0xD00xB50xD00xBD0xD10x8B0xD00xB9"></a>
-											</div>
-										</div>
-
-										<hr>
-								</div>
-							</div>
-
-							<div class="hidden" id="img-repo">
-
-								<!-- #image-1 -->
-								<div class="item" id="image-1">
-									<img class="thumbnail img-responsive" title="Image 11"
-										src="http://dummyimage.com/600x350/ccc/969696">
-								</div>
-								<div class="item" id="image-1">
-									<img class="thumbnail img-responsive" title="Image 12"
-										src="http://dummyimage.com/600x600/ccc/969696">
-								</div>
-								<div class="item" id="image-1">
-									<img class="thumbnail img-responsive" title="Image 13"
-										src="http://dummyimage.com/300x300/ccc/969696">
-								</div>
-
-								<!-- #image-2 -->
-								<div class="item" id="image-2">
-									<img class="thumbnail img-responsive" title="Image 21"
-										src="http://dummyimage.com/600x350/2255EE/969696">
-								</div>
-								<div class="item" id="image-2">
-									<img class="thumbnail img-responsive" title="Image 21"
-										src="http://dummyimage.com/600x600/2255EE/969696">
-								</div>
-								<div class="item" id="image-2">
-									<img class="thumbnail img-responsive" title="Image 23"
-										src="http://dummyimage.com/300x300/2255EE/969696">
-								</div>
-
-								<!-- #image-3-->
-								<div class="item" id="image-3">
-									<img class="thumbnail img-responsive" title="Image 31"
-										src="http://dummyimage.com/600x350/449955/FFF">
-								</div>
-								<div class="item" id="image-3">
-									<img class="thumbnail img-responsive" title="Image 32"
-										src="http://dummyimage.com/600x600/449955/FFF">
-								</div>
-								<div class="item" id="image-3">
-									<img class="thumbnail img-responsive" title="Image 33"
-										src="http://dummyimage.com/300x300/449955/FFF">
-								</div>
-
-							</div>
-
-							<div class="modal" id="modal-gallery" role="dialog">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button class="close" type="button" data-dismiss="modal">×</button>
-											<h3 class="modal-title"></h3>
-										</div>
-										<div class="modal-body">
-											<div id="modal-carousel" class="carousel">
-
-												<div class="carousel-inner"></div>
-
-												<a class="carousel-control left" href="#modal-carousel"
-													data-slide="prev"><i
-													class="glyphicon glyphicon-chevron-left"></i></a> <a
-													class="carousel-control right" href="#modal-carousel"
-													data-slide="next"><i
-													class="glyphicon glyphicon-chevron-right"></i></a>
-
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button class="btn btn-default" data-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
 
 						</div>
 						<div class="step-22"></div>
@@ -608,6 +483,5 @@
 	src="<%=request.getContextPath()%>/resources/inscription/js/inscription.js"></script>
 <script
 	src="<%=request.getContextPath()%>/resources/reservation/js/reservation.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/galeriephoto.js"></script>
 </body>
 </html>

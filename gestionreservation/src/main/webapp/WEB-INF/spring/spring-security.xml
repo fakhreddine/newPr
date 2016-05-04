@@ -17,11 +17,13 @@
 
 
 	<http auto-config='true'  use-expressions="true">
-		<intercept-url pattern="/secured/*" access="hasRole('ADMIN')" />
-		<intercept-url pattern="/admin/*" access="hasRole('AGENT')" />
-		<intercept-url pattern="/client/*" access="hasRole('CLIENT')" />
+		<intercept-url pattern="/secured/*" access="hasRole('ANONYMOUS')" />
+		<intercept-url pattern="/admin/*" access="hasRole('ANONYMOUS')" />
+		<intercept-url pattern="/client/*" access="hasRole('ANONYMOUS')" />
+		<intercept-url pattern="/reservation/new1" access="hasRole('ANONYMOUS')" />
 		<form-login login-page="/login" default-target-url="/secured/home"
 			authentication-failure-url="/loginError" />
+		<csrf disabled="true"/>
 	</http>
 
 	

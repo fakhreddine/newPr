@@ -41,6 +41,7 @@ public class Chambre implements Serializable {
 	@JoinColumn(name="idCategorie")
 	private Categorie categorie;
 
+	
 	//bi-directional many-to-one association to Hotel
 	@ManyToOne
 	@JoinColumn(name="idHotel")

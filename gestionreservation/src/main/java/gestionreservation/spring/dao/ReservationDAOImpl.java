@@ -43,12 +43,16 @@ public class ReservationDAOImpl implements ReservationDAO {
 		}
 		return reservationsList;
 	}
-
-	public Reservation getReservationById(int id) {
+	@SuppressWarnings("unchecked")
+	public Reservation getReservationById(String id) {
 		Session session = this.sessionFactory.getCurrentSession();		
-		Reservation p = (Reservation) session.load(Reservation.class, new Integer(id));
-		logger.info("Reservation loaded successfully, Reservation details="+p);
-		return p;
+	//	Reservation p = (Reservation) session.load(Reservation.class, new String(id));
+		//logger.info("Reservation loaded successfully, Reservation details="+p);
+		List<Reservation> reservationsList = session.createQuery("from Reservation where idReservation='"+id+"'").list();
+		for(Reservation p : reservationsList){
+			logger.info("Reservation List::"+p);
+		}
+		return reservationsList.get(0);
 	}
 
 	public void removeReservation(int id) {

@@ -38,7 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Transactional
-	public Reservation getReservationById(int id) {
+	public Reservation getReservationById(String id) {
 		return this.reservationDAO.getReservationById(id);
 	}
 

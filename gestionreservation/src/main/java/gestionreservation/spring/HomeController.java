@@ -15,21 +15,64 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import gestionreservation.spring.model.Chambre;
 import gestionreservation.spring.model.Role;
 import gestionreservation.spring.model.Utilisateur;
+import gestionreservation.spring.service.ChambreService;
+import gestionreservation.spring.service.HotelService;
+import gestionreservation.spring.service.OffreService;
+import gestionreservation.spring.service.PensionService;
 
 @Controller
-public class UtilisateurController {
+public class HomeController {
 	@Autowired
-	@Qualifier(value = "utilisateurServiceImpl")
-	private UserDetailsService utilisateurService;
+	@Qualifier(value = "offreServiceImpl")
+	private OffreService offreService;
+	@Autowired
+	@Qualifier(value = "hotelServiceImpl")
+	private HotelService hotelService;
+	@Autowired
+	@Qualifier(value = "chambreServiceImpl")
+	private ChambreService chambreService;
+	@Autowired
+	@Qualifier(value = "pensionServiceImpl")
+	private PensionService pensionService;
 
-	public void setUtilisateurService(UserDetailsService ps) {
-		this.utilisateurService = ps;
+	public void setOffreService(OffreService ps) {
+		this.offreService = ps;
 	}
+	public void setHotelService(HotelService ps) {
+		this.hotelService = ps;
+	}
+	public void setPensionService(PensionService ps) {
+		this.pensionService = ps;
+	}
+	public void setChambreService(ChambreService ps) {
+		this.chambreService = ps;
+	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {
+		model.addAttribute("chambre", new Chambre());
+		model.addAttribute("listChambres", this.chambreService.listChambres());
+		return "index";
+	}
+	@RequestMapping(value = "/hotes", method = RequestMethod.GET)
+	public String hotels(Model model) {
+		model.addAttribute("chambre", new Chambre());
+		model.addAttribute("listChambres", this.chambreService.listChambres());
+		return "index";
+	}
+	@RequestMapping(value = "/offrs", method = RequestMethod.GET)
+	public String offres(Model model) {
+		
+		return "index";
+	}
+	
+	
 
 
-
+/*
 	@RequestMapping(value = "/inscription1", method = RequestMethod.GET)
 	public String testinscription(Model model) {
 		return "testinscription";
@@ -86,7 +129,7 @@ public class UtilisateurController {
 		 */
 		// String name = user.getUsername();
 		// model.addAttribute("username", name);
-		model.addAttribute("message", "Welcome to the Hello World page");
+	/*	model.addAttribute("message", "Welcome to the Hello World page");
 		return "helloworld";
 
 	}
@@ -138,5 +181,5 @@ public class UtilisateurController {
     //  this.utilisateurService.addUtilisateur(user);
       return "hotel";
 	}
-
+*/
 }
