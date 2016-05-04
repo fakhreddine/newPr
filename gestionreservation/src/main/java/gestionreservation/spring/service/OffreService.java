@@ -10,7 +10,7 @@ public interface OffreService {
 	public void addOffre(Offre p);
 	public void updateOffre(Offre p);
 	public List<Offre> listOffres();
-	public Offre getOffreById(int id);
+	public Offre getOffreById(String id);
 	public void removeOffre(int id);
 	
 }

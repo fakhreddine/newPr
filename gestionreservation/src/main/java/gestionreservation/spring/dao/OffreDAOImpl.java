@@ -44,11 +44,12 @@ public class OffreDAOImpl implements OffreDAO {
 		return offresList;
 	}
 
-	public Offre getOffreById(int id) {
+	public Offre getOffreById(String id) {
 		Session session = this.sessionFactory.getCurrentSession();		
-		Offre p = (Offre) session.load(Offre.class, new Integer(id));
-		logger.info("Offre loaded successfully, Offre details="+p);
-		return p;
+		//Offre p = (Offre) session.load(Offre.class, new String(id));
+		//logger.info("Offre loaded successfully, Offre details="+p);
+		List<Offre> offresList = session.createQuery("from Offre where idOffre='"+id+"'").list();
+		return offresList.get(0);
 	}
 
 	public void removeOffre(int id) {

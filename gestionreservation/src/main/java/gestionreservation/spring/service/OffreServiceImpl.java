@@ -33,7 +33,7 @@ public class OffreServiceImpl implements OffreService {
 	}
 
 	@Transactional
-	public Offre getOffreById(int id) {
+	public Offre getOffreById(String id) {
 		return this.offreDAO.getOffreById(id);
 	}
 

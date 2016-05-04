@@ -23,12 +23,25 @@ public class OffreController {
 		this.offreService = ps;
 	}
 	
-	@RequestMapping(value = "/offres", method = RequestMethod.GET)
+	@RequestMapping(value = "/off", method = RequestMethod.GET)
 	public String listOffres(Model model) {
 		model.addAttribute("offre", new Offre());
 		model.addAttribute("listOffres", this.offreService.listOffres());
 		return "offre";
 	}
+	
+
+	@RequestMapping(value = "/offres", method = RequestMethod.GET)
+	public String lOffres(Model model) {
+		model.addAttribute("listOffres", this.offreService.listOffres());
+		return "offres";
+	}
+	@RequestMapping("/offre/{idOffre}")
+    public String getoffre(@PathVariable("idOffre") String id, Model model){
+        model.addAttribute("offre", this.offreService.getOffreById(id));
+        return "offre";
+    }
+	
 	
 	//For add and update person both
 	@RequestMapping(value= "/offre/add", method = RequestMethod.POST)
@@ -57,7 +70,7 @@ public class OffreController {
  
     @RequestMapping("/offre/{idOffre}/edit")
     public String editOffre(@PathVariable("idOffre") int id, Model model){
-        model.addAttribute("offre", this.offreService.getOffreById(id));
+    //    model.addAttribute("offre", this.offreService.getOffreById(id));
         model.addAttribute("listOffres", this.offreService.listOffres());
         return "offre";
     }
