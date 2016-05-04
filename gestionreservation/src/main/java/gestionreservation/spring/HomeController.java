@@ -69,7 +69,10 @@ public class HomeController {
 		return "index";
 	}
 	
-	
+	@RequestMapping(value = "/Copiezero", method = RequestMethod.GET)
+	public String copie(Model model) {
+		return "Copie_zero";
+	}
 
 
 /*
