@@ -37,19 +37,26 @@ public class OffreDAOImpl implements OffreDAO {
 
 	public List<Offre> listOffres() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Offre> offresList = session.createQuery("from Offre").list();
+		List<Offre> offresList = session.createQuery("from offre").list();
 		for(Offre p : offresList){
 			logger.info("Offre List::"+p);
 		}
 		return offresList;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Offre getOffreById(String id) {
 		Session session = this.sessionFactory.getCurrentSession();		
 		//Offre p = (Offre) session.load(Offre.class, new String(id));
 		//logger.info("Offre loaded successfully, Offre details="+p);
 		List<Offre> offresList = session.createQuery("from Offre where idOffre='"+id+"'").list();
-		return offresList.get(0);
+		if(offresList.get(0)!=null)
+		{
+			return offresList.get(0);
+		}else{
+			return new Offre();
+		}
+		
 	}
 
 	public void removeOffre(int id) {

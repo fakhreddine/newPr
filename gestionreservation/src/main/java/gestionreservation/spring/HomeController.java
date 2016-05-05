@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import gestionreservation.spring.model.Chambre;
+import gestionreservation.spring.model.Pension;
 import gestionreservation.spring.model.Role;
 import gestionreservation.spring.model.Utilisateur;
 import gestionreservation.spring.service.ChambreService;
@@ -26,16 +27,16 @@ import gestionreservation.spring.service.PensionService;
 @Controller
 public class HomeController {
 	@Autowired
-	@Qualifier(value = "offreServiceImpl")
+	@Qualifier(value = "offreService")
 	private OffreService offreService;
 	@Autowired
-	@Qualifier(value = "hotelServiceImpl")
+	@Qualifier(value = "hotelService")
 	private HotelService hotelService;
 	@Autowired
-	@Qualifier(value = "chambreServiceImpl")
+	@Qualifier(value = "chambreService")
 	private ChambreService chambreService;
 	@Autowired
-	@Qualifier(value = "pensionServiceImpl")
+	@Qualifier(value = "pensionService")
 	private PensionService pensionService;
 
 	public void setOffreService(OffreService ps) {
@@ -53,8 +54,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		model.addAttribute("chambre", new Chambre());
-		model.addAttribute("listChambres", this.chambreService.listChambres());
+		model.addAttribute("pension", new Pension());
+		model.addAttribute("listPensions", this.pensionService.listPensions());
 		return "index";
 	}
 	@RequestMapping(value = "/hotes", method = RequestMethod.GET)
@@ -65,7 +66,6 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/offrs", method = RequestMethod.GET)
 	public String offres(Model model) {
-		
 		return "index";
 	}
 	

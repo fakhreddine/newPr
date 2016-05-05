@@ -37,10 +37,10 @@ public class ChambreDAOImpl implements ChambreDAO {
 
 	public List<Chambre> listChambres() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Chambre> chambresList = session.createQuery("from Chambre").list();
-		for(Chambre p : chambresList){
+		List<Chambre> chambresList = session.createQuery("from chambre").list();
+		/*for(Chambre p : chambresList){
 			logger.info("Chambre List::"+p);
-		}
+		}*/
 		return chambresList;
 	}
 
