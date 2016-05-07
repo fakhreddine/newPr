@@ -56,17 +56,8 @@
 		<beans:property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
-
-
-
-
-
-	<!-- <beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop> -->
-	<beans:bean id="adminDAO" class="gestionreservation.spring.dao.AdminDAOImpl">
-		<beans:property name="sessionFactory"
-			ref="hibernate4AnnotatedSessionFactory" />
-	</beans:bean>
-	<beans:bean id="agentDAO" class="gestionreservation.spring.dao.AgentDAOImpl">
+	<beans:bean id="utilisateurDAO1"
+		class="gestionreservation.spring.dao.UtilisateurDAOImpl">
 		<beans:property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
@@ -77,10 +68,6 @@
 	</beans:bean>
 	<beans:bean id="chambreDAO"
 		class="gestionreservation.spring.dao.ChambreDAOImpl">
-		<beans:property name="sessionFactory"
-			ref="hibernate4AnnotatedSessionFactory" />
-	</beans:bean>
-	<beans:bean id="clientDAO" class="gestionreservation.spring.dao.ClientDAOImpl">
 		<beans:property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
@@ -138,13 +125,9 @@
 		class="gestionreservation.spring.service.UtilisateurServiceImpl">
 		<beans:property name="utilisateurDAO" ref="utilisateurDAO" />
 	</beans:bean>
-	<beans:bean id="adminService"
-		class="gestionreservation.spring.service.AdminServiceImpl">
-		<beans:property name="adminDAO" ref="adminDAO"></beans:property>
-	</beans:bean>
-	<beans:bean id="agentService"
-		class="gestionreservation.spring.service.AgentServiceImpl">
-		<beans:property name="agentDAO" ref="agentDAO"></beans:property>
+	<beans:bean id="utilisateurServiceImplv0"
+		class="gestionreservation.spring.service.UtilisateurServiceImplv0">
+		<beans:property name="utilisateurDAO1" ref="utilisateurDAO1" />
 	</beans:bean>
 	<beans:bean id="categorieService"
 		class="gestionreservation.spring.service.CategorieServiceImpl">
@@ -153,10 +136,6 @@
 	<beans:bean id="chambreService"
 		class="gestionreservation.spring.service.ChambreServiceImpl">
 		<beans:property name="chambreDAO" ref="chambreDAO"></beans:property>
-	</beans:bean>
-	<beans:bean id="clientService"
-		class="gestionreservation.spring.service.ClientServiceImpl">
-		<beans:property name="clientDAO" ref="clientDAO"></beans:property>
 	</beans:bean>
 	<beans:bean id="factureService"
 		class="gestionreservation.spring.service.FactureServiceImpl">

@@ -66,9 +66,11 @@ public class Utilisateur extends Personne implements UserDetails{
 	 
 	 
 	//bi-directional many-to-one association to Reservation
-	@OneToMany(mappedBy="utilisateur")
-	private List<Reservation> reservations;
+	@OneToMany(mappedBy="agent")
+	private List<Reservation> reservationspar;
 
+	@OneToMany(mappedBy="client")
+	private List<Reservation> reservations;
 	
 	
 	
@@ -133,14 +135,15 @@ public class Utilisateur extends Personne implements UserDetails{
 
 	public Reservation addReservation(Reservation reservation) {
 		getReservations().add(reservation);
-		reservation.setUtilisateur(this);
+
 
 		return reservation;
 	}
 
 	public Reservation removeReservation(Reservation reservation) {
 		getReservations().remove(reservation);
-		reservation.setUtilisateur(null);
+		reservation.setAgent(null);
+		reservation.setClient(null);
 
 		return reservation;
 	}

@@ -13,11 +13,9 @@
 		<property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
 		
 		
-				<mapping class="gestionreservation.spring.model.Agent" />
+
 				<mapping class="gestionreservation.spring.model.Categorie" />
 				<mapping class="gestionreservation.spring.model.Chambre" />
-				<mapping class="gestionreservation.spring.model.Client" />
-				<mapping class="gestionreservation.spring.model.Admin" />
 				<mapping class="gestionreservation.spring.model.Facture" />
 				<mapping class="gestionreservation.spring.model.Hotel" />
 				<mapping class="gestionreservation.spring.model.Offre" />

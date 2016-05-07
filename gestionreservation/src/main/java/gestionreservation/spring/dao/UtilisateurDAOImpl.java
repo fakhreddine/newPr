@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import gestionreservation.spring.model.Role;
@@ -29,6 +30,11 @@ public class UtilisateurDAOImpl {
 	
 	
 	public void addUtilisateur(Utilisateur p) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(p);
+		logger.info("Utilisateur saved successfully, Utilisateur Details="+p);
+	}
+	public void singUtilisateur(Utilisateur p) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(p);
 		logger.info("Utilisateur saved successfully, Utilisateur Details="+p);

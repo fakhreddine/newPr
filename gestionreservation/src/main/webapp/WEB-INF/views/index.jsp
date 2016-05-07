@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -19,8 +20,8 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/article_chambre_with_galerie.css" />
 </head>
+<jsp:include flush="true" page="/logsing" /></td>
 
-<%@include file="header.jsp" %>
 
 
 

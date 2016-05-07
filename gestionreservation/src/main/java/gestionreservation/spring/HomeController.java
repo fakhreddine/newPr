@@ -27,6 +27,13 @@ import gestionreservation.spring.service.PensionService;
 @Controller
 public class HomeController {
 	@Autowired
+	@Qualifier(value = "utilisateurServiceImpl")
+	private UserDetailsService utilisateurService;
+
+	public void setUtilisateurService(UserDetailsService ps) {
+		this.utilisateurService = ps;
+	}
+	@Autowired
 	@Qualifier(value = "offreService")
 	private OffreService offreService;
 	@Autowired
@@ -67,6 +74,10 @@ public class HomeController {
 	@RequestMapping(value = "/offrs", method = RequestMethod.GET)
 	public String offres(Model model) {
 		return "index";
+	}
+	@RequestMapping(value = "/ad", method = RequestMethod.GET)
+	public String ad(Model model) {
+		return "admin/index";
 	}
 	
 	

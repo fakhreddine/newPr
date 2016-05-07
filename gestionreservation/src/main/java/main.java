@@ -365,7 +365,8 @@ class main {
 		lc1.add(c1);
 		r1.setChambres(lc1);
 		r1.setNbPersonne(8);
-		r1.setUtilisateur(user3);
+		r1.setClient(user3);
+		r1.setAgent(user1);
 		r1.setArrivee(true);
 		session.save(r1);
 		
@@ -375,7 +376,8 @@ class main {
 		r2.setChambres(lc2);
 		r2.setNbPersonne(8);
 		r2.setArrivee(true);
-		r2.setUtilisateur(user3);
+		r1.setClient(user3);
+		r1.setAgent(user1);
 		session.save(r2);
 		
 		Reservation r3=new Reservation();
@@ -384,10 +386,31 @@ class main {
 		r3.setChambres(lc3);
 		r3.setNbPersonne(4);
 		r3.setArrivee(false);
-		r3.setUtilisateur(user1);
+		r1.setClient(user3);
+		r1.setAgent(user1);
 		session.save(r3);
 		
+		Reservation r4=new Reservation();
+		List<Chambre> lc4 =new ArrayList<Chambre>();
+		lc4.add(c1);
+		lc4.add(c2);
+		lc4.add(c3);
+		r4.setChambres(lc4);
+		r4.setNbPersonne(8);
+		r4.setArrivee(true);
+		r4.setClient(user3);
+		r4.setAgent(user1);
+		session.save(r4);
 		
+		Reservation r5=new Reservation();
+		List<Chambre> lc5 =new ArrayList<Chambre>();
+		lc5.add(c5);
+		r5.setChambres(lc5);
+		r5.setNbPersonne(4);
+		r5.setArrivee(false);
+		r5.setClient(user3);
+		r5.setAgent(user1);
+		session.save(r5);
 		
 		
 		

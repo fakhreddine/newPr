@@ -23,7 +23,13 @@ import gestionreservation.spring.service.UtilisateurServiceImpl;
 
 @Controller
 public class HotelController {
-	
+	@Autowired
+	@Qualifier(value = "utilisateurServiceImpl")
+	private UserDetailsService utilisateurService;
+
+	public void setUtilisateurService(UserDetailsService ps) {
+		this.utilisateurService = ps;
+	}
 	private HotelService hotelService;
 	//private UtilisateurServiceImpl utilisateurService;
 	

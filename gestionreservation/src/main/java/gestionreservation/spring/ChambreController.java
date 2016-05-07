@@ -2,6 +2,7 @@ package gestionreservation.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +14,14 @@ import gestionreservation.spring.service.ChambreService;
 
 @Controller
 public class ChambreController {
-	
+	@Autowired
+	@Qualifier(value = "utilisateurServiceImpl")
+	private UserDetailsService utilisateurService;
+
+	public void setUtilisateurService(UserDetailsService ps) {
+		this.utilisateurService = ps;
+	}
+
 	private ChambreService chambreService;
 	
 	@Autowired(required=true)

@@ -15,47 +15,46 @@ import gestionreservation.spring.model.Utilisateur;
 
 @Service
 
-public class UtilisateurServiceImpl implements UserDetailsService{
+public class UtilisateurServiceImplv0 implements UtilisateurService {
 	
 	@Autowired
-	private UtilisateurDAOImpl utilisateurDAO;
+	private UtilisateurDAOImpl utilisateurDAO1;
 	
 	@Transactional
-	public UtilisateurDAOImpl getUtilisateurDAO() {
-		return utilisateurDAO;
+	public UtilisateurDAOImpl getUtilisateurDAO1() {
+		return utilisateurDAO1;
 	}
 	@Transactional
-	public void setUtilisateurDAO(UtilisateurDAOImpl utilisateurDAO) {
-		this.utilisateurDAO = utilisateurDAO;
+	public void setUtilisateurDAO1(UtilisateurDAOImpl utilisateurDAO) {
+		this.utilisateurDAO1 = utilisateurDAO;
 	}      
 	@Transactional
-	@Override
-	public Utilisateur loadUserByUsername(String username) throws UsernameNotFoundException {
-		return utilisateurDAO.loadUserByUsername(username);
-	}
-	@Transactional
 	public void addUtilisateur(Utilisateur p) {
-		utilisateurDAO.addUtilisateur(p);
+		utilisateurDAO1.addUtilisateur(p);
 		
 	}
-	
+	@Transactional
+	public void singUtilisateur(Utilisateur p) {
+		utilisateurDAO1.singUtilisateur(p);
+		
+	}
 	@Transactional
 	public void updateUtilisateur(Utilisateur p) {
-		utilisateurDAO.updateUtilisateur(p);
+		utilisateurDAO1.updateUtilisateur(p);
 	}
 	@Transactional
 	public List<Utilisateur> listUtilisateurs() {
 		
-		return utilisateurDAO.listUtilisateurs();
+		return utilisateurDAO1.listUtilisateurs();
 	}
 
 	public Utilisateur getUtilisateurById(int id) {
 		
-	 return utilisateurDAO.getUtilisateurById(id);
+	 return utilisateurDAO1.getUtilisateurById(id);
 	}
 
 	public void removeUtilisateur(int id) {
-		utilisateurDAO.removeUtilisateur(id);
+		utilisateurDAO1.removeUtilisateur(id);
 		
 	}
 	

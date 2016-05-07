@@ -2,6 +2,7 @@ package gestionreservation.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +15,13 @@ import gestionreservation.spring.service.OffreService;
 
 @Controller
 public class OffreController {
-	
+	@Autowired
+	@Qualifier(value = "utilisateurServiceImpl")
+	private UserDetailsService utilisateurService;
+
+	public void setUtilisateurService(UserDetailsService ps) {
+		this.utilisateurService = ps;
+	}
 	private OffreService offreService;
 	
 	@Autowired(required=true)

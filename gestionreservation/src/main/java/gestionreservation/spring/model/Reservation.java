@@ -51,8 +51,8 @@ public class Reservation implements Serializable {
 
 	//bi-directional many-to-one association to Agent
 	@ManyToOne
-	@JoinColumn(name="Age_idPersonne")
-	private Agent agent;
+	@JoinColumn(name="idAgent")
+	private Utilisateur agent;
 
 	//bi-directional many-to-one association to Facture
 	@ManyToOne
@@ -61,8 +61,8 @@ public class Reservation implements Serializable {
 
 	//bi-directional many-to-one association to Utilisateur
 	@ManyToOne
-	@JoinColumn(name="idPersonne")
-	private Utilisateur utilisateur;
+	@JoinColumn(name="idClient")
+	private Utilisateur client;
 
 	//bi-directional many-to-one association to Serviceconsommation
 	@OneToMany(mappedBy="reservation")
@@ -159,11 +159,11 @@ public class Reservation implements Serializable {
 		this.chambres = chambres;
 	}
 
-	public Agent getAgent() {
+	public Utilisateur getAgent() {
 		return this.agent;
 	}
 
-	public void setAgent(Agent agent) {
+	public void setAgent(Utilisateur agent) {
 		this.agent = agent;
 	}
 
@@ -175,12 +175,14 @@ public class Reservation implements Serializable {
 		this.facture = facture;
 	}
 
-	public Utilisateur getUtilisateur() {
-		return this.utilisateur;
+	
+
+	public Utilisateur getClient() {
+		return client;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setClient(Utilisateur client) {
+		this.client = client;
 	}
 
 	public List<Serviceconsommation> getServiceconsommations() {

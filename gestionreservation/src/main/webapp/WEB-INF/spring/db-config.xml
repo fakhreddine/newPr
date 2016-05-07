@@ -11,7 +11,8 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/tx 
-		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		">
 
 		<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -28,11 +29,8 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
-				<beans:value>gestionreservation.spring.model.Agent</beans:value>
 				<beans:value>gestionreservation.spring.model.Categorie</beans:value>
 				<beans:value>gestionreservation.spring.model.Chambre</beans:value>
-				<beans:value>gestionreservation.spring.model.Client</beans:value>
-				<beans:value>gestionreservation.spring.model.Admin</beans:value>
 				<beans:value>gestionreservation.spring.model.Facture</beans:value>
 				<beans:value>gestionreservation.spring.model.Hotel</beans:value>
 				<beans:value>gestionreservation.spring.model.Offre</beans:value>
